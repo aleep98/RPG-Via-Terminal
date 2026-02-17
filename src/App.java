@@ -1,16 +1,18 @@
 import com.teste.Personagem.Personagem;
 import com.teste.TipoClasse.TipoClasse;
-import java.util.Scanner;
 
+import java.util.Random;
+import java.util.Scanner;
+import com.teste.Inimigo.TipoInimigos;
 import com.teste.Combate;
 import com.teste.Inimigo.Inimigo;
 
 public class App {
 
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-      System.out.println("--------MENU DE CRIAÇÃO DE PERSONAGEM--------");
+        System.out.println("--------MENU DE CRIAÇÃO DE PERSONAGEM--------");
         System.out.println("Digite o nome do personagem:");
         String nome = scanner.nextLine();
 
@@ -21,37 +23,33 @@ public class App {
 
         int escolhaClasse = scanner.nextInt();
         TipoClasse classEscolhida = null;
-        
+
         switch (escolhaClasse) {
             case 1:
-                classEscolhida= TipoClasse.GUERREIRO;
+                classEscolhida = TipoClasse.GUERREIRO;
                 break;
             case 2:
-                classEscolhida= TipoClasse.PALADIN;
+                classEscolhida = TipoClasse.PALADIN;
                 break;
             case 3:
-                classEscolhida= TipoClasse.MAGE;
+                classEscolhida = TipoClasse.MAGE;
                 break;
             default:
                 System.out.println("Classe inválida!");
         }
 
-        Personagem personagem = new Personagem (nome, classEscolhida, 100);
+        Personagem personagem = new Personagem(nome, classEscolhida, 100);
         personagem.informacoes();
         personagem.getArma();
-    
-        Inimigo  inimigo = new Inimigo("Goblin", 30, 5);
-        Combate combate = new Combate();
-        combate.Iniciar(personagem, inimigo);
 
-        if (inimigo.getVida() <= 0) {
-            System.out.println("Você venceu!");
-        } else {
-            personagem.receberDano(inimigo.getAtaque());
-            if (personagem.getVida() <= 0) {
-                System.out.println("Morte!");
-            }
-        }
+        Random random = new Random();
+        TipoInimigos[] tiposInimigos = TipoInimigos.values();
+        TipoInimigos tipoAleatorio = tiposInimigos[random.nextInt(tiposInimigos.length)];
+        Inimigo inimigo = new Inimigo(tipoAleatorio);
+
+        Combate combate = new Combate();
+        combate.iniciar(personagem, inimigo);
+
         scanner.close();
     }
 

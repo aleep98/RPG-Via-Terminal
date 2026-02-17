@@ -1,34 +1,22 @@
 package com.teste.Inimigo;
-
 public class Inimigo {
-    String nome;
+   private TipoInimigos tipo;
     int vida;
-    String tipo;
     int ataque;
 
-    public Inimigo(String nome, int vida, int ataque){
-        this.nome = nome;
-        this.tipo = "desconhecido";
-        this.vida = vida;
-        this.ataque = ataque;
+    public Inimigo(TipoInimigos  tipo){
+        this.tipo = tipo;
+        this.vida = tipo.getVida();
+        this.ataque = tipo.getAtaque();
     }
 
-
-    public String getNome() {
-        return nome;
-    }
-
-
-    public String getTipo() {
+    public TipoInimigos getTipoInimigos() {
         return tipo;
     }
-
-    public void setTipo(String tipo){
-        this.tipo = tipo;
-    }
+  
     
     public void atacar(){
-        System.out.println("O inimigo " + this.nome + " está atacando! ");
+        System.out.println("O inimigo " + this.tipo + " está atacando! ");
     }
 
     public int getAtaque(){
@@ -43,7 +31,16 @@ public class Inimigo {
     public void receberDano(int dano) {
     this.vida -= dano;
     if (this.vida <= 0) {
-        System.out.println(this.nome + " foi derrotado!");
+        System.out.println(this.tipo + " foi derrotado!");
     }
 }
+    public void setTipo(TipoInimigos tipo) {
+        this.tipo = tipo;
+    }
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
 }

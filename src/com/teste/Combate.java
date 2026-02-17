@@ -5,11 +5,13 @@ import com.teste.Personagem.Personagem;
 import com.teste.Inimigo.Inimigo;
 
 public class Combate {
-    public void iniciarCombate() {
 
-        Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Combate Iniciado!");
+    public void iniciar(Personagem jogador, Inimigo inimigo) {
+
+        System.out.println("O inimigo " + inimigo.getTipoInimigos() + " apareceu!");
+        System.out.println("Combate iniciado!");
 
         System.out.println("-------MENU DE AÇÕES-------");
         System.out.println("1 - Atacar");
@@ -19,41 +21,47 @@ public class Combate {
         int escolherAcao = scanner.nextInt();
 
         switch (escolherAcao) {
+
             case 1:
                 System.out.println("Você atacou o inimigo!");
                 int dano = (int) (Math.random() * 20 + 1);
+                inimigo.receberDano(dano);
                 System.out.println("Você causou " + dano + " de dano");
                 break;
+
             case 2:
                 System.out.println("Você se defendeu!");
-                escolherAcao = 0 + (int) (Math.random() * 10 + 1);
-                System.out.println("Você reduziu o dano em " + escolherAcao);
+                int defesa = (int) (Math.random() * 10 + 1);
+                System.out.println("Você reduziu o dano em " + defesa);
                 break;
+
             case 3:
-                System.out.println("Você fugiu do combate!");
-                escolherAcao = 0 + (int) (Math.random() * 10 + 1);
-                if (escolherAcao > 5) {
+                System.out.println("Você tentou fugir!");
+                int chance = (int) (Math.random() * 10 + 1);
+
+                if (chance > 5) {
                     System.out.println("Fuga bem sucedida!");
+                    return;
                 } else {
-                    System.out.println("Fuga falhou! O inimigo te alcançou!");
+                    System.out.println("Fuga falhou!");
                 }
                 break;
+
             default:
                 System.out.println("Opção inválida!");
+                return;
         }
 
+        // Turno do inimigo
+        if (inimigo.getVida() > 0) {
+            jogador.receberDano(inimigo.getAtaque());
+            System.out.println("O inimigo atacou você!");
+        }
 
-        
-        scanner.close();
+        if (inimigo.getVida() <= 0) {
+            System.out.println("Você venceu!");
+        } else if (jogador.getVida() <= 0) {
+            System.out.println("Você morreu!");
+        }
     }
-
-    
-
-    public void Iniciar(Personagem jogador, Inimigo inimigo) {
-        System.out.println("O inimigo " + inimigo.getNome() + " apareceu!");
-        iniciarCombate();
-
-      
-    }
-
 }
