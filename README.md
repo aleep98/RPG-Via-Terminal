@@ -27,9 +27,27 @@ O projeto começou com a criação básica do personagem e menu de seleção. Em
 A estrutura foi pensada para facilitar a adição de novas funcionalidades, como itens, evolução de personagem, múltiplos inimigos, missões e sistema de inventário.
 
 ## Como Executar
-1. Compile todos os arquivos Java na pasta `src`.
-2. Execute o arquivo `App.java`.
-3. Siga as instruções no terminal para criar seu personagem e iniciar o combate.
+### Pré-requisitos
+- Ter o **Java JDK** instalado (versão 8 ou superior).
+
+### Via Terminal
+1. Abra o terminal e navegue até a pasta `src` do projeto:
+   ```bash
+   cd src
+   ```
+2. Compile o arquivo principal (o compilador buscará as outras classes automaticamente):
+   ```bash
+   javac App.java
+   ```
+3. Execute o jogo:
+   ```bash
+   java App
+   ```
+
+### Via IDE (VS Code, IntelliJ, Eclipse)
+1. Abra a pasta raiz do projeto (`Ex001`) na sua IDE de preferência.
+2. Navegue até o arquivo `src/App.java`.
+3. Clique no botão de **Run** ou use o atalho de execução da IDE.
 
 ## Próximos Passos
 - Adicionar sistema de itens e inventário.
