@@ -17,7 +17,9 @@ public class Combate {
         System.out.println("-------MENU DE AÇÕES-------");
         System.out.println("1 - Atacar");
         System.out.println("2 - Defender");
-        System.out.println("3 - Fugir");
+        System.out.println("3 - Usar Poção de vida");
+        System.out.println("4 - Fugir");
+
 
         int escolherAcao = scanner.nextInt();
 
@@ -25,7 +27,7 @@ public class Combate {
 
             case 1:
                 System.out.println("Você atacou o inimigo!");
-                int dano = (int) (Math.random() * 20 + 1);
+                int dano = (int) (Math.random() * 30 + 1);
                 inimigo.receberDano(dano);
                 System.out.println("Você causou " + dano + " de dano");
                 break;
@@ -37,6 +39,13 @@ public class Combate {
                 break;
 
             case 3:
+                System.out.println("Você usou uma poção de vida!");
+                int cura = (int) (Math.random() * 30 + 5);
+                jogador.setVida(jogador.getVida() + cura);
+                System.out.println("Você recuperou " + cura + " de vida. Vida atual: " + jogador.getVida());
+                break;
+
+            case 4:
                 System.out.println("Você tentou fugir!");
                 int chance = (int) (Math.random() * 10 + 1);
 
@@ -61,10 +70,10 @@ public class Combate {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         // Turno do inimigo
         if (inimigo.getVida() > 0) {
-            int danoInimigo = inimigo.getAtaque();
+            int danoInimigo = (int) (Math.random() * 30 + 1);
             jogador.receberDano(danoInimigo);
             System.out.println("O inimigo causou " + danoInimigo + " de dano");
         }

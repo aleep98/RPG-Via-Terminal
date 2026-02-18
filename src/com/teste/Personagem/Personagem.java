@@ -15,6 +15,11 @@ public class Personagem {
 
     }
 
+    public int setVida(int vida) {
+        this.vida = vida;
+        return vida;
+    }
+
     public int getVida() {
         return vida;
     }

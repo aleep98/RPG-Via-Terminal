@@ -4,13 +4,13 @@ package com.teste.Inimigo;
     public enum  TipoInimigos{
         GOBLIN(50, 10),
         ORC(100, 20),
-        TROLL(150, 30),
-        ESQUELETO(75, 15),
-        ZUMBI(80, 25),
-        DRAGAO(200, 40),
-        DEMONIO(120, 35),
-        VAMPIRO(90, 20),
-        LOBISOMEM(110, 30);
+        TROLL(100, 30),
+        ESQUELETO(50, 15),
+        ZUMBI(60, 25),
+        DRAGAO(100, 40),
+        DEMONIO(100, 35),
+        VAMPIRO(100, 20),
+        LOBISOMEM(100, 30);
 
         private int vida;
         private int ataque;
