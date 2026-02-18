@@ -13,6 +13,7 @@ public class Combate {
         System.out.println("O inimigo " + inimigo.getTipoInimigos() + " apareceu!");
         System.out.println("Combate iniciado!");
 
+        while (jogador.getVida() > 0 && inimigo.getVida() > 0) {
         System.out.println("-------MENU DE AÇÕES-------");
         System.out.println("1 - Atacar");
         System.out.println("2 - Defender");
@@ -51,11 +52,12 @@ public class Combate {
                 System.out.println("Opção inválida!");
                 return;
         }
-
+    }
         // Turno do inimigo
         if (inimigo.getVida() > 0) {
-            jogador.receberDano(inimigo.getAtaque());
-            System.out.println("O inimigo atacou você!");
+            int danoInimigo = inimigo.getAtaque();
+            jogador.receberDano(danoInimigo);
+            System.out.println("O inimigo causou " + danoInimigo + " de dano");
         }
 
         if (inimigo.getVida() <= 0) {
