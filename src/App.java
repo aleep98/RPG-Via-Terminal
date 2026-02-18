@@ -1,6 +1,5 @@
 import com.teste.Personagem.Personagem;
 import com.teste.TipoClasse.TipoClasse;
-
 import java.util.Random;
 import java.util.Scanner;
 import com.teste.Inimigo.TipoInimigos;
@@ -38,7 +37,7 @@ public class App {
                 System.out.println("Classe inválida!");
         }
 
-        Personagem personagem = new Personagem(nome, classEscolhida, 100);
+        Personagem personagem = new Personagem(nome, classEscolhida);
         personagem.informacoes();
         personagem.getArma();
 

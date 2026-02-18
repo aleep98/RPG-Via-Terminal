@@ -1,17 +1,30 @@
 package com.teste.Personagem;
 
+import com.teste.bolsa.*;
+
 import com.teste.TipoClasse.TipoClasse;
 
 public class Personagem {
 
     private String nome;
     private TipoClasse classe;
-    int vida;
+    private int ataque;
+    private int vida;
+    private Bolsa bolsa;
+    private int defesa;
 
-    public Personagem(String nome, TipoClasse classe, int vida) {
+    public Personagem(String nome, TipoClasse classe) {
         this.nome = nome;
         this.classe = classe;
-        this.vida = 100;
+        this.vida = classe.getVida();
+        this.ataque = classe.getAtaque();
+        this.defesa = classe.getDefesa();
+        this.bolsa = new Bolsa();
+
+    }
+
+    public Bolsa getBolsa() {
+        return bolsa;
 
     }
 
@@ -49,12 +62,29 @@ public class Personagem {
         }
     }
 
-    public void receberDano(int dano){
-        this.vida -= dano;
-        if (vida <= 0 ){
-            System.out.println("O personagem " + this.nome + " foi derrotado!");
-        } else {
-            System.out.println("O personagem " + this.nome + " recebeu " + dano + " de dano. Vida restante: " + this.vida);
+    public void curar(int cura) {
+        this.vida += cura;
+        if (this.vida > 100) {
+            this.vida = 100;
         }
     }
+
+    public int getDefesa() {
+        return defesa;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+     public void receberDano(int dano) {
+        this.vida -= dano;
+        if (vida <= 0) {
+            System.out.println("O personagem " + this.nome + " foi derrotado!");
+        } else {
+            System.out.println(
+                    "O personagem " + this.nome + " recebeu " + dano + " de dano. Vida restante: " + this.vida);
+        }
+    }
+
 }

@@ -1,22 +1,24 @@
 package com.teste.Items;
 
+import com.teste.Personagem.Personagem;
+
 public class Items {
-    private String pocao;
+    private String nome;
     private String tipo;
     private int efeito;
 
-    public Items(String pocao, String tipo, int efeito){
-        this.pocao = pocao;
+    public Items(String nome, String tipo, int efeito){
+        this.nome = nome;
         this.tipo = tipo;
         this.efeito = efeito;
     }
 
-    public String getPocao() {
-        return pocao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPocao(String pocao) {
-        this.pocao = pocao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getTipo() {
@@ -36,7 +38,13 @@ public class Items {
     }
 
     public void usarItem(){
-        System.out.println("Usando o item " + this.pocao);
+        System.out.println("Usando o item " + this.getNome());
     }
 
+    public void usarItem(Personagem jogador){
+        if (tipo.equals("Cura")){
+            jogador.curar(efeito);
+            System.out.println("Você recuperou " + efeito + " pontos de vida. Vida Atual: " + jogador.getVida());
+        }
+    }
 }

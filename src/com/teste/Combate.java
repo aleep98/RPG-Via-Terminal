@@ -3,6 +3,7 @@ package com.teste;
 import java.util.Scanner;
 import com.teste.Personagem.Personagem;
 import com.teste.Inimigo.Inimigo;
+import com.teste.Items.Items;
 
 public class Combate {
 
@@ -13,77 +14,87 @@ public class Combate {
         System.out.println("O inimigo " + inimigo.getTipoInimigos() + " apareceu!");
         System.out.println("Combate iniciado!");
 
+      
         while (jogador.getVida() > 0 && inimigo.getVida() > 0) {
+
+    boolean turnoEncerrado = false;
+    int defesaAtiva = 0;
+
+    while (!turnoEncerrado) {
+
         System.out.println("-------MENU DE AÇÕES-------");
         System.out.println("1 - Atacar");
         System.out.println("2 - Defender");
-        System.out.println("3 - Usar Poção de vida");
+        System.out.println("3 - Abrir Bolsa");
         System.out.println("4 - Fugir");
-
 
         int escolherAcao = scanner.nextInt();
 
         switch (escolherAcao) {
 
             case 1:
-                System.out.println("Você atacou o inimigo!");
-                int dano = (int) (Math.random() * 30 + 1);
+                int dano = jogador.getAtaque() + (int)(Math.random() * 15);
                 inimigo.receberDano(dano);
-                System.out.println("Você causou " + dano + " de dano");
-                System.out.println("Vida do inimigo: " + inimigo.getVida());
+                System.out.println("Você causou " + dano + " de dano.");
+                turnoEncerrado = true;
                 break;
 
             case 2:
-                System.out.println("Você se defendeu!");
-                int defesa = (int) (Math.random() * 10 + 1);
-                System.out.println("Você reduziu o dano em " + defesa);
+                defesaAtiva = jogador.getDefesa() + (int)(Math.random() * 10);
+                System.out.println("Você vai reduzir o próximo dano em " + defesaAtiva);
+                turnoEncerrado = true;
                 break;
 
             case 3:
-                System.out.println("Você usou uma poção de vida!");
-                int cura = (int) (Math.random() * 30 + 5);
-                jogador.setVida(jogador.getVida() + cura);
-                System.out.println("Você recuperou " + cura + " de vida. Vida atual: " + jogador.getVida());
+                jogador.getBolsa().listarItems();
+                System.out.println("Escolha o item:");
+                int escolhaItem = scanner.nextInt();
+
+                Items item = jogador.getBolsa().getItems().get(escolhaItem);
+                item.usarItem(jogador);
+                jogador.getBolsa().removerItem(item);
+
+                // NÃO encerra turno
                 break;
 
             case 4:
                 System.out.println("Você tentou fugir!");
-                int chance = (int) (Math.random() * 10 + 1);
-
-                if (chance > 5) {
+                if (Math.random() > 0.5) {
                     System.out.println("Fuga bem sucedida!");
                     return;
                 } else {
                     System.out.println("Fuga falhou!");
+                    turnoEncerrado = true;
                 }
                 break;
 
             default:
                 System.out.println("Opção inválida!");
-                return;
-        }
-
-    
-        try {
-            System.out.println("\nAguardando o proximo turno...");
-            Thread.sleep(5000);
-            
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Turno do inimigo
-        if (inimigo.getVida() > 0) {
-            int danoInimigo = (int) (Math.random() * 30 + 1);
-            jogador.receberDano(danoInimigo);
-            System.out.println("O inimigo causou " + danoInimigo + " de dano");
-        }
-
-        if (inimigo.getVida() <= 0) {
-            System.out.println("Você venceu!");
-        } else if (jogador.getVida() <= 0) {
-            System.out.println("Você morreu!");
         }
     }
+
+    // TURNO DO INIMIGO (só acontece após ação principal)
+
+    if (inimigo.getVida() > 0) {
+
+        int danoInimigo = inimigo.getAtaque() + (int)(Math.random() * 10);
+        int danoFinal = Math.max(0, danoInimigo - defesaAtiva);
+
+        jogador.receberDano(danoFinal);
+
+        System.out.println("O inimigo causou " + danoFinal + " de dano!");
+    }
+
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
 }
+        if (inimigo.getVida() <= 0) {
+            System.out.println("🎉 Você venceu!");
+        } else if (jogador.getVida() <= 0) {
+            System.out.println("💀 Você morreu!");
+        }
+    }
 }
