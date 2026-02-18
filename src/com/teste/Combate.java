@@ -52,7 +52,16 @@ public class Combate {
                 System.out.println("Opção inválida!");
                 return;
         }
-    }
+
+    
+        try {
+            System.out.println("\nAguardando o proximo turno...");
+            Thread.sleep(5000);
+            
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
         // Turno do inimigo
         if (inimigo.getVida() > 0) {
             int danoInimigo = inimigo.getAtaque();
@@ -66,4 +75,5 @@ public class Combate {
             System.out.println("Você morreu!");
         }
     }
+}
 }
