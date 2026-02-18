@@ -30,6 +30,7 @@ public class Combate {
                 int dano = (int) (Math.random() * 30 + 1);
                 inimigo.receberDano(dano);
                 System.out.println("Você causou " + dano + " de dano");
+                System.out.println("Vida do inimigo: " + inimigo.getVida());
                 break;
 
             case 2:
