@@ -1,8 +1,4 @@
-package com.teste.Personagem;
-
-import com.teste.bolsa.*;
-
-import com.teste.TipoClasse.TipoClasse;
+package com.model;
 
 public class Personagem {
 

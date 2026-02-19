@@ -1,4 +1,4 @@
-package com.teste.Inimigo;
+package com.model;
 
 
     public enum  TipoInimigos{

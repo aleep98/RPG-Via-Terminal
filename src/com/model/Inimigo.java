@@ -1,4 +1,5 @@
-package com.teste.Inimigo;
+package com.model;
+
 public class Inimigo {
    private TipoInimigos tipo;
     int vida;

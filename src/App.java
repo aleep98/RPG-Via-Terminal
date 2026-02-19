@@ -1,10 +1,11 @@
-import com.teste.Personagem.Personagem;
-import com.teste.TipoClasse.TipoClasse;
 import java.util.Random;
 import java.util.Scanner;
-import com.teste.Inimigo.TipoInimigos;
-import com.teste.Combate;
-import com.teste.Inimigo.Inimigo;
+
+import com.model.Inimigo;
+import com.model.Personagem;
+import com.model.TipoClasse;
+import com.model.TipoInimigos;
+import com.service.CombateController;
 
 public class App {
 
@@ -46,8 +47,8 @@ public class App {
         TipoInimigos tipoAleatorio = tiposInimigos[random.nextInt(tiposInimigos.length)];
         Inimigo inimigo = new Inimigo(tipoAleatorio);
 
-        Combate combate = new Combate();
-        combate.iniciar(personagem, inimigo);
+        CombateController combate = new CombateController();
+        combate.iniciarCombate(personagem, inimigo);
 
         scanner.close();
     }

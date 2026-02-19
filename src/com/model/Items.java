@@ -1,6 +1,4 @@
-package com.teste.Items;
-
-import com.teste.Personagem.Personagem;
+package com.model;
 
 public class Items {
     private String nome;

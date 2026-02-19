@@ -1,4 +1,4 @@
-package com.teste.TipoClasse;
+package com.model;
 
 public enum TipoClasse {
 

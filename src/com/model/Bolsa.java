@@ -1,8 +1,7 @@
-package com.teste.bolsa;
+package com.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.teste.Items.Items;
 
 public class Bolsa {
     private List<Items> item;
