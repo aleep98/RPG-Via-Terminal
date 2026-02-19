@@ -50,10 +50,9 @@ A estrutura foi pensada para facilitar a adição de novas funcionalidades, como
 3. Clique no botão de **Run** ou use o atalho de execução da IDE.
 
 ## Próximos Passos
-- Adicionar sistema de itens e inventário.
 - Implementar evolução de personagem (níveis, experiência).
-- Criar múltiplos inimigos e batalhas sequenciais.
 - Adicionar narrativa e missões.
+- Adicionar banco de dados para salvar o progresso do jogador
 
 ---
 
