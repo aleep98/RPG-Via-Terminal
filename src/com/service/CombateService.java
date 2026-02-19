@@ -50,7 +50,13 @@ public class CombateService {
         return jogador.getVida() > 0 && inimigo.getVida() > 0;
     }
 
-    public boolean jogadorVenceu(Inimigo inimigo) {
-        return inimigo.getVida() <= 0;
+    public boolean jogadorVenceu(Inimigo inimigo, Personagem jogador) {
+        if (inimigo.getVida() <= 0) {
+            nivelService.ganharXP(jogador, 50);
+            return true;
+        }
+        return false;
     }
+
+    private NivelService nivelService = new NivelService();
 }

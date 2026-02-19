@@ -84,8 +84,8 @@ public class CombateController {
             esperar(1000);
         }
 
-        if (combateService.jogadorVenceu(inimigo)) {
-            System.out.println(" Você venceu o combate!");
+        if (combateService.jogadorVenceu(inimigo, jogador)) {
+            System.out.println(" Você venceu o combate! E ganhou 50 XP!");
         } else {
             System.out.println(" Você morreu...");
         }

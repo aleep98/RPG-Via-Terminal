@@ -8,6 +8,9 @@ public class Personagem {
     private int vida;
     private Bolsa bolsa;
     private int defesa;
+    private int xp;
+    private int nivel;
+    private int xpNecessario;
 
     public Personagem(String nome, TipoClasse classe) {
         this.nome = nome;
@@ -16,7 +19,9 @@ public class Personagem {
         this.ataque = classe.getAtaque();
         this.defesa = classe.getDefesa();
         this.bolsa = new Bolsa();
-
+        this.xp = 0;
+        this.nivel = 1;
+        this.xpNecessario = 100;
     }
 
     public Bolsa getBolsa() {
@@ -73,6 +78,10 @@ public class Personagem {
         return ataque;
     }
 
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
      public void receberDano(int dano) {
         this.vida -= dano;
         if (vida <= 0) {
@@ -83,4 +92,27 @@ public class Personagem {
         }
     }
 
+     public int getXp() {
+        return xp;
+     }
+
+     public void setXp(int i) {
+        this.xp = i;
+     }
+
+     public int getNivel(){
+        return nivel;
+     }
+
+     public void setNivel(int i){
+        this.nivel = i;
+     }
+
+     public int getXpNecessario() {
+         return xpNecessario;
+     }
+
+        public void setXpNecessario(int xpNecessario) {
+            this.xpNecessario = xpNecessario;
+        }
 }
