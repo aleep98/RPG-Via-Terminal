@@ -1,5 +1,5 @@
 package com.model;
-
+import java.util.Objects;
 public class Personagem {
 
     private String nome;
@@ -13,8 +13,9 @@ public class Personagem {
     private int xpNecessario;
 
     public Personagem(String nome, TipoClasse classe) {
+
         this.nome = nome;
-        this.classe = classe;
+        this.classe = Objects.requireNonNull(classe, "A classe não pode ser nula.");
         this.vida = classe.getVida();
         this.ataque = classe.getAtaque();
         this.defesa = classe.getDefesa();
@@ -48,19 +49,6 @@ public class Personagem {
 
     public TipoClasse getClasse() {
         return classe;
-    }
-
-    public String getArma() {
-        switch (classe) {
-            case GUERREIRO:
-                return "Espada";
-            case PALADIN:
-                return "Martelo";
-            case MAGE:
-                return "Cajado";
-            default:
-                return "Desconhecida";
-        }
     }
 
     public void curar(int cura) {

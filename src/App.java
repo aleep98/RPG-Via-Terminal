@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("--------MENU DE CRIAÇÃO DE PERSONAGEM--------");
+        System.out.println("--------MENU DE CRIACAO DE PERSONAGEM--------");
         System.out.println("Digite o nome do personagem:");
         String nome = scanner.nextLine();
 
@@ -21,26 +21,34 @@ public class App {
         System.out.println("2 - Paladin");
         System.out.println("3 - Mage");
 
-        int escolhaClasse = scanner.nextInt();
         TipoClasse classEscolhida = null;
 
-        switch (escolhaClasse) {
-            case 1:
-                classEscolhida = TipoClasse.GUERREIRO;
-                break;
-            case 2:
-                classEscolhida = TipoClasse.PALADIN;
-                break;
-            case 3:
-                classEscolhida = TipoClasse.MAGE;
-                break;
-            default:
-                System.out.println("Classe inválida!");
+        while (classEscolhida == null) {
+            int escolhaClasse;
+            try {
+                escolhaClasse = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada invalida. Digite 1, 2 ou 3.");
+                continue;
+            }
+
+            switch (escolhaClasse) {
+                case 1:
+                    classEscolhida = TipoClasse.GUERREIRO;
+                    break;
+                case 2:
+                    classEscolhida = TipoClasse.PALADIN;
+                    break;
+                case 3:
+                    classEscolhida = TipoClasse.MAGE;
+                    break;
+                default:
+                    System.out.println("Classe invalida! Digite 1, 2 ou 3.");
+            }
         }
 
         Personagem personagem = new Personagem(nome, classEscolhida);
         personagem.informacoes();
-        personagem.getArma();
 
         Random random = new Random();
         TipoInimigos[] tiposInimigos = TipoInimigos.values();

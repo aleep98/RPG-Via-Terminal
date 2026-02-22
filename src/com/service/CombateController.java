@@ -1,7 +1,4 @@
 package com.service;
-
-import com.service.CombateController;
-
 import java.util.Scanner;
 import com.model.Inimigo;
 import com.model.Personagem;

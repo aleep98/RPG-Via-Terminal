@@ -7,7 +7,7 @@ package com.model;
         TROLL(100, 30),
         ESQUELETO(50, 15),
         ZUMBI(60, 25),
-        DRAGAO(100, 40),
+        BOSS_DRAGAO(100, 40),
         DEMONIO(100, 35),
         VAMPIRO(100, 20),
         LOBISOMEM(100, 30);
