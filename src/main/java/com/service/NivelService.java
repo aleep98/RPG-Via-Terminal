@@ -1,13 +1,28 @@
 package com.service;
 
 import com.model.Personagem;
+import com.repository.PersonagemRepository;
 
 public class NivelService {
+    private final PersonagemRepository personagemRepository;
+
+    public NivelService() {
+        this.personagemRepository = null;
+    }
+
+    public NivelService(PersonagemRepository personagemRepository) {
+        this.personagemRepository = personagemRepository;
+    }
+
     public void ganharXP(Personagem personagem, int xp) {
         personagem.setXp(personagem.getXp() + xp);
 
         while (personagem.getXp() >= xpNecessario(personagem.getNivel())) {
             subirNivel(personagem);
+        }
+
+        if (personagemRepository != null) {
+            personagemRepository.salvarOuAtualizar(personagem);
         }
     }
 

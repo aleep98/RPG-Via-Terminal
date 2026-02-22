@@ -15,6 +15,11 @@ public class CombateController {
         this.combateService = new CombateService();
     }
 
+    public CombateController(CombateService combateService) {
+        this.scanner = new Scanner(System.in);
+        this.combateService = combateService;
+    }
+
     public void iniciarCombate(Personagem jogador, Inimigo inimigo) {
         System.out.println("O inimigo " + inimigo.getTipoInimigos() + " apareceu!");
         System.out.println("Combate iniciado!");

@@ -26,6 +26,18 @@ public class Personagem {
         this.nivel = 1;
     }
 
+    public Personagem(String nome, TipoClasse classe, int ataque, int defesa, int vida, int vidaMaxima, int xp, int nivel) {
+        this.nome = nome;
+        this.classe = Objects.requireNonNull(classe, "A classe nao pode ser nula.");
+        this.ataque = ataque;
+        this.defesa = defesa;
+        this.vidaMaxima = vidaMaxima;
+        this.vida = Math.max(0, Math.min(vida, vidaMaxima));
+        this.bolsa = new Bolsa();
+        this.xp = xp;
+        this.nivel = nivel;
+    }
+
     public Bolsa getBolsa() {
         return bolsa;
     }

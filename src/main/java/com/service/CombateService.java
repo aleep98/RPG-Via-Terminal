@@ -6,6 +6,16 @@ import com.model.Personagem;
 
 public class CombateService {
 
+    private final NivelService nivelService;
+
+    public CombateService() {
+        this.nivelService = new NivelService();
+    }
+
+    public CombateService(NivelService nivelService) {
+        this.nivelService = nivelService;
+    }
+
     public int realizarAtaque(Personagem atacante, Inimigo alvo) {
         int dano = atacante.getAtaque() + (int) (Math.random() * 15);
         alvo.receberDano(dano);
@@ -57,6 +67,4 @@ public class CombateService {
         }
         return false;
     }
-
-    private NivelService nivelService = new NivelService();
 }

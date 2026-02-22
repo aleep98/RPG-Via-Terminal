@@ -3,17 +3,17 @@
 Projeto de RPG simples em Java, jogado no terminal, focado em pratica de orientacao a objetos, separacao em camadas e regras de combate.
 
 ## Estrutura atual
-- `src/App.java`: ponto de entrada, criacao do personagem e inicio do combate.
-- `src/com/model/Personagem.java`: dados do jogador (vida, vida maxima, ataque, defesa, nivel, xp, bolsa).
-- `src/com/model/Inimigo.java`: dados e comportamento basico do inimigo.
-- `src/com/model/Bolsa.java`: inventario inicial e operacoes de item.
-- `src/com/model/Items.java`: item de cura e item de ataque temporario.
-- `src/com/model/TipoClasse.java`: classes do jogador (Guerreiro, Paladin, Mage).
-- `src/com/model/TipoInimigos.java`: tipos de inimigo.
-- `src/com/service/CombateController.java`: fluxo interativo de turno no terminal.
-- `src/com/service/CombateService.java`: regras de combate (ataque, defesa, fuga, item, turno do inimigo).
-- `src/com/service/NivelService.java`: ganho de XP e subida de nivel.
-- `src/com/test/GameSmokeTests.java`: testes basicos sem framework.
+- `src/main/java/App.java`: ponto de entrada, criacao do personagem e inicio do combate.
+- `src/main/java/com/model/Personagem.java`: dados do jogador (vida, vida maxima, ataque, defesa, nivel, xp, bolsa).
+- `src/main/java/com/model/Inimigo.java`: dados e comportamento basico do inimigo.
+- `src/main/java/com/model/Bolsa.java`: inventario inicial e operacoes de item.
+- `src/main/java/com/model/Items.java`: item de cura e item de ataque temporario.
+- `src/main/java/com/model/TipoClasse.java`: classes do jogador (Guerreiro, Paladin, Mage).
+- `src/main/java/com/model/TipoInimigos.java`: tipos de inimigo.
+- `src/main/java/com/service/CombateController.java`: fluxo interativo de turno no terminal.
+- `src/main/java/com/service/CombateService.java`: regras de combate (ataque, defesa, fuga, item, turno do inimigo).
+- `src/main/java/com/service/NivelService.java`: ganho de XP e subida de nivel.
+- `src/test/java/com/test/GameSmokeTests.java`: testes basicos sem framework.
 
 ## Funcionalidades
 - Criacao de personagem com validacao de classe.
@@ -36,7 +36,13 @@ Projeto de RPG simples em Java, jogado no terminal, focado em pratica de orienta
 Na raiz do projeto (`Ex001`):
 
 ```bash
-javac --release 8 -d bin src/App.java src/com/model/*.java src/com/service/*.java
+mvn compile exec:java
+```
+
+Opcionalmente, sem Maven:
+
+```bash
+javac --release 8 -d bin src/main/java/App.java src/main/java/com/model/*.java src/main/java/com/service/*.java
 java -cp bin App
 ```
 
@@ -44,7 +50,7 @@ java -cp bin App
 Na raiz do projeto (`Ex001`):
 
 ```bash
-javac --release 8 -d bin src/App.java src/com/model/*.java src/com/service/*.java src/com/test/*.java
+javac --release 8 -d bin src/main/java/App.java src/main/java/com/model/*.java src/main/java/com/service/*.java src/test/java/com/test/*.java
 java -cp bin com.test.GameSmokeTests
 ```
 
