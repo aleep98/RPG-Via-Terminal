@@ -1,59 +1,59 @@
-
 # RPG de Terminal em Java
 
-Este projeto é um RPG simples desenvolvido em Java, jogado totalmente pelo terminal. Ele foi criado com o objetivo de praticar conceitos de orientação a objetos, modularização e interação com o usuário via console.
+Projeto de RPG simples em Java, jogado no terminal, focado em pratica de orientacao a objetos, separacao em camadas e regras de combate.
 
-## Estrutura do Projeto
-- **App.java**: Ponto de entrada do jogo. Gerencia o menu, criação de personagem e início do combate.
-- **Personagem.java**: Define o personagem do jogador, com atributos como nome, classe e vida.
-- **Inimigo.java**: Representa os inimigos enfrentados durante o jogo.
-- **Combate.java**: Responsável pela lógica de combate entre personagem e inimigo.
-- **TipoClasse.java**: Enum para os tipos de classe disponíveis (Guerreiro, Paladino, Mago).
-- **Classe.java**: Especialização de personagem, podendo ter métodos próprios.
+## Estrutura atual
+- `src/App.java`: ponto de entrada, criacao do personagem e inicio do combate.
+- `src/com/model/Personagem.java`: dados do jogador (vida, vida maxima, ataque, defesa, nivel, xp, bolsa).
+- `src/com/model/Inimigo.java`: dados e comportamento basico do inimigo.
+- `src/com/model/Bolsa.java`: inventario inicial e operacoes de item.
+- `src/com/model/Items.java`: item de cura e item de ataque temporario.
+- `src/com/model/TipoClasse.java`: classes do jogador (Guerreiro, Paladin, Mage).
+- `src/com/model/TipoInimigos.java`: tipos de inimigo.
+- `src/com/service/CombateController.java`: fluxo interativo de turno no terminal.
+- `src/com/service/CombateService.java`: regras de combate (ataque, defesa, fuga, item, turno do inimigo).
+- `src/com/service/NivelService.java`: ganho de XP e subida de nivel.
+- `src/com/test/GameSmokeTests.java`: testes basicos sem framework.
 
 ## Funcionalidades
-- Criação de personagem com nome e escolha de classe.
-- Sistema de combate simples entre personagem e inimigo.
-- Exibição de mensagens de vitória ou derrota.
-- Estrutura modular, facilitando a expansão do projeto.
+- Criacao de personagem com validacao de classe.
+- Combate por turno com opcoes:
+  - atacar
+  - defender
+  - usar item
+  - fugir
+- Sistema de bolsa com itens iniciais.
+- Efeito de item de cura e ataque temporario.
+- Sistema de XP e nivel:
+  - +50 XP por vitoria
+  - aumento de nivel quando atinge o XP necessario
+  - aumento de vida maxima, vida atual e ataque ao subir de nivel
 
-## Crescimento do Projeto
-O projeto começou com a criação básica do personagem e menu de seleção. Em seguida, foram adicionados:
-- Enum para tipos de classe.
-- Sistema de combate separado em uma classe própria.
-- Classe de inimigo com atributos e métodos para receber dano.
-- Mensagens automáticas de vitória e derrota.
+## Requisitos
+- JDK 8 ou superior.
 
-A estrutura foi pensada para facilitar a adição de novas funcionalidades, como itens, evolução de personagem, múltiplos inimigos, missões e sistema de inventário.
+## Como executar o jogo
+Na raiz do projeto (`Ex001`):
 
-## Como Executar
-### Pré-requisitos
-- Ter o **Java JDK** instalado (versão 8 ou superior).
+```bash
+javac --release 8 -d bin src/App.java src/com/model/*.java src/com/service/*.java
+java -cp bin App
+```
 
-### Via Terminal
-1. Abra o terminal e navegue até a pasta `src` do projeto:
-   ```bash
-   cd src
-   ```
-2. Compile o arquivo principal (o compilador buscará as outras classes automaticamente):
-   ```bash
-   javac App.java
-   ```
-3. Execute o jogo:
-   ```bash
-   java App
-   ```
+## Como executar os testes basicos
+Na raiz do projeto (`Ex001`):
 
-### Via IDE (VS Code, IntelliJ, Eclipse)
-1. Abra a pasta raiz do projeto (`Ex001`) na sua IDE de preferência.
-2. Navegue até o arquivo `src/App.java`.
-3. Clique no botão de **Run** ou use o atalho de execução da IDE.
+```bash
+javac --release 8 -d bin src/App.java src/com/model/*.java src/com/service/*.java src/com/test/*.java
+java -cp bin com.test.GameSmokeTests
+```
 
-## Próximos Passos
-- Implementar evolução de personagem (níveis, experiência).
-- Adicionar narrativa e missões.
-- Adicionar banco de dados para salvar o progresso do jogador
+Se tudo estiver correto, a saida termina com:
 
----
+```text
+[OK] Todos os testes basicos passaram.
+```
 
-Este projeto é ideal para quem está aprendendo Java e deseja praticar lógica, orientação a objetos e interação com o usuário.
+## Observacoes
+- O projeto ainda pode evoluir para persistencia de progresso, multiplos combates encadeados e testes com framework (JUnit).
+- Arquivos compilados devem ficar em `bin/`.

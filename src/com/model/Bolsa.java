@@ -13,17 +13,17 @@ public class Bolsa {
         this.capacidade = 10;
         this.item = new ArrayList<>();
 
-        item.add(new Items("Poção de Vida", TipoItem.CURA, 20));
+        item.add(new Items("Pocao de Vida", TipoItem.CURA, 20));
         item.add(new Items("Pergaminho Flamejante", TipoItem.ATAQUE_TEMPORARIO, 10));
-        item.add(new Items("Poção Fúria", TipoItem.ATAQUE_TEMPORARIO, 15));
+        item.add(new Items("Pocao Furia", TipoItem.ATAQUE_TEMPORARIO, 15));
     }
 
     public void adicionarItem(Items item) {
         if (this.item.size() < capacidade) {
             this.item.add(item);
-            System.out.println(item.getNome() + " foi adicionado à bolsa.");
+            System.out.println(item.getNome() + " foi adicionado a bolsa.");
         } else {
-            System.out.println("A bolsa está cheia!");
+            System.out.println("A bolsa esta cheia!");
         }
     }
 

@@ -1,5 +1,7 @@
 package com.service;
+
 import java.util.Scanner;
+
 import com.model.Inimigo;
 import com.model.Personagem;
 
@@ -18,7 +20,7 @@ public class CombateController {
         System.out.println("Combate iniciado!");
 
         while (combateService.isCombateAtivo(jogador, inimigo)) {
-            
+
             boolean turnoEncerrado = false;
             int defesaAtiva = 0;
 
@@ -27,47 +29,46 @@ public class CombateController {
                 int opcao = lerOpcao();
 
                 switch (opcao) {
-                    case 1: 
+                    case 1:
                         int dano = combateService.realizarAtaque(jogador, inimigo);
-                        System.out.println("Você causou " + dano + " de dano.");
+                        System.out.println("Voce causou " + dano + " de dano.");
                         turnoEncerrado = true;
                         break;
 
-                    case 2: 
+                    case 2:
                         defesaAtiva = combateService.calcularDefesa(jogador);
-                        System.out.println("Você assumiu postura defensiva! Redução de dano: " + defesaAtiva);
+                        System.out.println("Voce assumiu postura defensiva! Reducao de dano: " + defesaAtiva);
                         turnoEncerrado = true;
                         break;
 
-                    case 3: 
+                    case 3:
                         jogador.getBolsa().listarItems();
-                        System.out.println("Escolha o número do item (ou -1 para voltar):");
+                        System.out.println("Escolha o numero do item (ou -1 para voltar):");
                         int escolhaItem = lerOpcao();
-                        
+
                         if (escolhaItem >= 0) {
                             String resultado = combateService.usarItem(jogador, escolhaItem);
                             if (resultado != null) {
-                                System.out.println("Você usou: " + resultado);
+                                System.out.println("Voce usou: " + resultado);
                             } else {
-                                System.out.println("Item inválido!");
+                                System.out.println("Item invalido!");
                             }
                         }
-                   
                         break;
 
-                    case 4: // Fugir
+                    case 4:
                         System.out.println("Tentando fugir...");
                         if (combateService.tentarFugir()) {
                             System.out.println("Fuga bem sucedida!");
-                            return; 
+                            return;
                         } else {
-                            System.out.println("A fuga falhou! Você perdeu o turno.");
+                            System.out.println("A fuga falhou! Voce perdeu o turno.");
                             turnoEncerrado = true;
                         }
                         break;
 
                     default:
-                        System.out.println("Opção inválida!");
+                        System.out.println("Opcao invalida!");
                 }
             }
 
@@ -77,19 +78,19 @@ public class CombateController {
                 System.out.println("O inimigo atacou e causou " + danoRecebido + " de dano!");
                 System.out.println("Sua vida: " + jogador.getVida() + " | Vida Inimigo: " + inimigo.getVida());
             }
-            
+
             esperar(1000);
         }
 
         if (combateService.jogadorVenceu(inimigo, jogador)) {
-            System.out.println(" Você venceu o combate! E ganhou 50 XP!");
+            System.out.println("Voce venceu o combate! E ganhou 50 XP!");
         } else {
-            System.out.println(" Você morreu...");
+            System.out.println("Voce morreu...");
         }
     }
 
     private void exibirMenu() {
-        System.out.println("\n-------MENU DE AÇÕES-------");
+        System.out.println("\n-------MENU DE ACOES-------");
         System.out.println("1 - Atacar");
         System.out.println("2 - Defender");
         System.out.println("3 - Abrir Bolsa");
@@ -106,6 +107,10 @@ public class CombateController {
     }
 
     private void esperar(int ms) {
-        try { Thread.sleep(ms); } catch (InterruptedException e) { e.printStackTrace(); }
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

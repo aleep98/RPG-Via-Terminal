@@ -43,17 +43,17 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
   - Retornar nome do item e efeito aplicado. -->
 
 ### 6) Ajustar regra de cura com vida maxima
-- Problema: cura limita vida em 100 fixo, mas classes podem iniciar com vida > 100.
+<!-- - Problema: cura limita vida em 100 fixo, mas classes podem iniciar com vida > 100.
 - Impacto: regra inconsistente para classes como Guerreiro.
 - Onde corrigir: `src/com/model/Personagem.java:66`, `src/com/model/Personagem.java:68`.
 - Sugestao:
   - Adicionar campo `vidaMaxima` no personagem.
-  - Usar `vidaMaxima` em `curar` e em ganho de nivel.
+  - Usar `vidaMaxima` em `curar` e em ganho de nivel. -->
 
 ### 7) Remover campo sem uso ou integrar na regra de nivel
-- Problema: `xpNecessario` existe no `Personagem`, mas a logica usa apenas `NivelService`.
+<!-- - Problema: `xpNecessario` existe no `Personagem`, mas a logica usa apenas `NivelService`.
 - Impacto: codigo redundante/confuso.
-- Onde corrigir: `src/com/model/Personagem.java:13`, `src/com/service/NivelService.java:24`.
+- Onde corrigir: `src/com/model/Personagem.java:13`, `src/com/service/NivelService.java:24`. -->
 
 ## Baixa prioridade / limpeza tecnica
 
@@ -68,11 +68,11 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
 - Onde corrigir: `src/com/service/CombateController.java:3`. -->
 
 ### 10) Melhorar encapsulamento de `Inimigo`
-- Problema: `vida` e `ataque` nao estao `private`.
+<!-- - Problema: `vida` e `ataque` nao estao `private`.
 - Impacto: quebra de encapsulamento.
-- Onde corrigir: `src/com/model/Inimigo.java:5`, `src/com/model/Inimigo.java:6`.
+- Onde corrigir: `src/com/model/Inimigo.java:5`, `src/com/model/Inimigo.java:6`. -->
 
 ## Extras recomendados (quando houver tempo)
-- Criar testes basicos para combate, itens e subida de nivel.
-- Revisar mensagens com acentuacao/encoding para evitar texto quebrado no terminal.
-- Remover arquivos `.class` de `src/` (deixar compilados so em `bin/` ou em pasta de build).
+<!-- - [x] Criar testes basicos para combate, itens e subida de nivel (`src/com/test/GameSmokeTests.java`).
+- [x] Revisar mensagens com acentuacao/encoding para evitar texto quebrado no terminal.
+- Remover arquivos `.class` de `src/` (deixar compilados so em `bin/` ou em pasta de build). -->

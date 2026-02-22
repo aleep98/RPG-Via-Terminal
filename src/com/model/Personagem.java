@@ -12,7 +12,6 @@ public class Personagem {
     private int defesa;
     private int xp;
     private int nivel;
-    private int xpNecessario;
     private int vidaMaxima;
 
     public Personagem(String nome, TipoClasse classe) {
@@ -25,7 +24,6 @@ public class Personagem {
         this.bolsa = new Bolsa();
         this.xp = 0;
         this.nivel = 1;
-        this.xpNecessario = 100;
     }
 
     public Bolsa getBolsa() {
@@ -114,11 +112,4 @@ public class Personagem {
         this.nivel = i;
     }
 
-    public int getXpNecessario() {
-        return xpNecessario;
-    }
-
-    public void setXpNecessario(int xpNecessario) {
-        this.xpNecessario = xpNecessario;
-    }
 }
