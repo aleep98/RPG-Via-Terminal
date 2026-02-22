@@ -2,9 +2,9 @@ package com.model;
 
 public enum TipoClasse {
 
-    GUERREIRO(120, 15, 10),
-    PALADIN(110, 12, 15),
-    MAGE(80, 25, 3);
+    GUERREIRO(100, 15, 10),
+    PALADIN(100, 12, 15),
+    MAGE(100, 25, 8);
 
     private int vida;
     private int ataque;

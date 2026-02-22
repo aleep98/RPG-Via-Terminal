@@ -3,6 +3,8 @@ package com.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.model.Items.TipoItem;
+
 public class Bolsa {
     private List<Items> item;
     private int capacidade;
@@ -11,9 +13,9 @@ public class Bolsa {
         this.capacidade = 10;
         this.item = new ArrayList<>();
 
-        item.add(new Items("Poção de Vida", "Cura", 20));
-        item.add(new Items("Pergaminho Flamejante", "Ataque", 10));
-        item.add(new Items("Poção Fúria", "Ataque", 15));
+        item.add(new Items("Poção de Vida", TipoItem.CURA, 20));
+        item.add(new Items("Pergaminho Flamejante", TipoItem.ATAQUE_TEMPORARIO, 10));
+        item.add(new Items("Poção Fúria", TipoItem.ATAQUE_TEMPORARIO, 15));
     }
 
     public void adicionarItem(Items item) {

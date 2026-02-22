@@ -12,13 +12,13 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
   - Repetir o menu ate receber opcao valida.
   - Ou definir classe padrao segura + aviso. -->
 
-### 2) Corrigir leitura de input entre `nextInt()` e `nextLine()`
+<!-- ### 2) Corrigir leitura de input entre `nextInt()` e `nextLine()`
 - Problema: `App` usa `scanner.nextInt()` e `CombateController` usa `nextLine()`.
 - Impacto: primeira leitura no combate pode virar opcao invalida por causa de `\n` pendente.
 - Onde corrigir: `src/App.java:24`, `src/com/service/CombateController.java:105`.
 - Sugestao:
   - Padronizar tudo com `nextLine()` + `Integer.parseInt(...)`.
-  - Ou consumir `\n` apos `nextInt()`.
+  - Ou consumir `\n` apos `nextInt()`. -->
 
 ### 3) Implementar efeito real para itens de ataque
 - Problema: itens do tipo `Ataque` sao consumidos mas nao causam efeito.
@@ -30,10 +30,10 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
 
 ## Media prioridade
 
-### 4) Exibir arma escolhida no fluxo de criacao
+<!-- ### 4) Exibir arma escolhida no fluxo de criacao
 - Problema: `getArma()` e chamado e descartado.
 - Impacto: informacao nao aparece para o jogador.
-- Onde corrigir: `src/App.java:43`.
+- Onde corrigir: `src/App.java:43`. -->
 
 ### 5) Melhorar retorno de `usarItem`
 - Problema: retorno atual e generico (`"Item utilizado"`).
@@ -62,10 +62,10 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
 - Impacto: documentacao inconsistente.
 - Onde corrigir: `README.md:10`, `README.md:12`.
 
-### 9) Remover import redundante/autorreferente
+<!-- ### 9) Remover import redundante/autorreferente
 - Problema: `CombateController` importa ele mesmo.
 - Impacto: ruido no codigo.
-- Onde corrigir: `src/com/service/CombateController.java:3`.
+- Onde corrigir: `src/com/service/CombateController.java:3`. -->
 
 ### 10) Melhorar encapsulamento de `Inimigo`
 - Problema: `vida` e `ataque` nao estao `private`.
