@@ -31,7 +31,7 @@ public class CombateService {
         jogador.getBolsa().removerItem(item);
         
   
-        return "Item utilizado"; 
+        return "Item utilizado: " + item.getNome() + " - Efeito: " + item.getEfeito(); 
     }
 
     public int turnoInimigo(Inimigo inimigo, Personagem jogador, int defesaJogador) {

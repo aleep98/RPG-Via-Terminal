@@ -1,5 +1,7 @@
 package com.model;
+
 import java.util.Objects;
+
 public class Personagem {
 
     private String nome;
@@ -11,12 +13,13 @@ public class Personagem {
     private int xp;
     private int nivel;
     private int xpNecessario;
+    private int vidaMaxima;
 
     public Personagem(String nome, TipoClasse classe) {
-
         this.nome = nome;
-        this.classe = Objects.requireNonNull(classe, "A classe não pode ser nula.");
-        this.vida = classe.getVida();
+        this.classe = Objects.requireNonNull(classe, "A classe nao pode ser nula.");
+        this.vidaMaxima = classe.getVida();
+        this.vida = this.vidaMaxima;
         this.ataque = classe.getAtaque();
         this.defesa = classe.getDefesa();
         this.bolsa = new Bolsa();
@@ -27,16 +30,35 @@ public class Personagem {
 
     public Bolsa getBolsa() {
         return bolsa;
-
     }
 
-    public int setVida(int vida) {
-        this.vida = vida;
-        return vida;
+    public void setVida(int vida) {
+        if (vida < 0) {
+            this.vida = 0;
+        } else if (vida > this.vidaMaxima) {
+            this.vida = this.vidaMaxima;
+        } else {
+            this.vida = vida;
+        }
     }
 
     public int getVida() {
         return vida;
+    }
+
+    public int getVidaMaxima() {
+        return vidaMaxima;
+    }
+
+    public void setVidaMaxima(int vidaMaxima) {
+        this.vidaMaxima = vidaMaxima;
+        if (this.vida > this.vidaMaxima) {
+            this.vida = this.vidaMaxima;
+        }
+    }
+
+    public boolean isVidaCheia() {
+        return this.vida == this.vidaMaxima;
     }
 
     public String getNome() {
@@ -44,7 +66,7 @@ public class Personagem {
     }
 
     public void informacoes() {
-        System.out.println("Eu sou: " + this.nome + " e minha classe é: " + this.classe);
+        System.out.println("Eu sou: " + this.nome + " e minha classe e: " + this.classe);
     }
 
     public TipoClasse getClasse() {
@@ -52,10 +74,7 @@ public class Personagem {
     }
 
     public void curar(int cura) {
-        this.vida += cura;
-        if (this.vida > 100) {
-            this.vida = 100;
-        }
+        setVida(this.vida + cura);
     }
 
     public int getDefesa() {
@@ -70,37 +89,36 @@ public class Personagem {
         this.ataque = ataque;
     }
 
-     public void receberDano(int dano) {
-        this.vida -= dano;
+    public void receberDano(int dano) {
+        setVida(this.vida - dano);
         if (vida <= 0) {
             System.out.println("O personagem " + this.nome + " foi derrotado!");
         } else {
-            System.out.println(
-                    "O personagem " + this.nome + " recebeu " + dano + " de dano. Vida restante: " + this.vida);
+            System.out.println("O personagem " + this.nome + " recebeu " + dano + " de dano. Vida restante: " + this.vida);
         }
     }
 
-     public int getXp() {
+    public int getXp() {
         return xp;
-     }
+    }
 
-     public void setXp(int i) {
+    public void setXp(int i) {
         this.xp = i;
-     }
+    }
 
-     public int getNivel(){
+    public int getNivel() {
         return nivel;
-     }
+    }
 
-     public void setNivel(int i){
+    public void setNivel(int i) {
         this.nivel = i;
-     }
+    }
 
-     public int getXpNecessario() {
-         return xpNecessario;
-     }
+    public int getXpNecessario() {
+        return xpNecessario;
+    }
 
-        public void setXpNecessario(int xpNecessario) {
-            this.xpNecessario = xpNecessario;
-        }
+    public void setXpNecessario(int xpNecessario) {
+        this.xpNecessario = xpNecessario;
+    }
 }

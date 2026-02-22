@@ -4,16 +4,16 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
 
 ## Alta prioridade (corrigir primeiro)
 
-<!-- ### 1) Validar escolha de classe antes de criar personagem
-- Problema: se o usuario escolher opcao fora de `1..3`, `classEscolhida` fica `null`.
+### 1) Validar escolha de classe antes de criar personagem
+<!-- - Problema: se o usuario escolher opcao fora de `1..3`, `classEscolhida` fica `null`.
 - Impacto: pode gerar erro ao instanciar `Personagem`.
 - Onde corrigir: `src/App.java:24`, `src/App.java:41`, `src/com/model/Personagem.java:18`.
 - Sugestao:
   - Repetir o menu ate receber opcao valida.
   - Ou definir classe padrao segura + aviso. -->
 
-<!-- ### 2) Corrigir leitura de input entre `nextInt()` e `nextLine()`
-- Problema: `App` usa `scanner.nextInt()` e `CombateController` usa `nextLine()`.
+### 2) Corrigir leitura de input entre `nextInt()` e `nextLine()`
+<!-- - Problema: `App` usa `scanner.nextInt()` e `CombateController` usa `nextLine()`.
 - Impacto: primeira leitura no combate pode virar opcao invalida por causa de `\n` pendente.
 - Onde corrigir: `src/App.java:24`, `src/com/service/CombateController.java:105`.
 - Sugestao:
@@ -21,26 +21,26 @@ Este arquivo lista as correcoes identificadas para serem implementadas depois.
   - Ou consumir `\n` apos `nextInt()`. -->
 
 ### 3) Implementar efeito real para itens de ataque
-- Problema: itens do tipo `Ataque` sao consumidos mas nao causam efeito.
+<!-- - Problema: itens do tipo `Ataque` sao consumidos mas nao causam efeito.
 - Impacto: jogador perde item sem beneficio.
 - Onde corrigir: `src/com/model/Items.java:42`, `src/com/model/Bolsa.java:15`, `src/com/model/Bolsa.java:16`.
 - Sugestao:
   - Criar retorno de dano bonus ao usar item ofensivo.
-  - Aplicar esse dano no fluxo do turno de combate.
+  - Aplicar esse dano no fluxo do turno de combate. -->
 
 ## Media prioridade
 
-<!-- ### 4) Exibir arma escolhida no fluxo de criacao
-- Problema: `getArma()` e chamado e descartado.
+### 4) Exibir arma escolhida no fluxo de criacao
+<!-- - Problema: `getArma()` e chamado e descartado.
 - Impacto: informacao nao aparece para o jogador.
 - Onde corrigir: `src/App.java:43`. -->
 
 ### 5) Melhorar retorno de `usarItem`
-- Problema: retorno atual e generico (`"Item utilizado"`).
+<!-- - Problema: retorno atual e generico (`"Item utilizado"`).
 - Impacto: feedback ruim para o jogador.
 - Onde corrigir: `src/com/service/CombateService.java:24`, `src/com/service/CombateService.java:34`.
 - Sugestao:
-  - Retornar nome do item e efeito aplicado.
+  - Retornar nome do item e efeito aplicado. -->
 
 ### 6) Ajustar regra de cura com vida maxima
 - Problema: cura limita vida em 100 fixo, mas classes podem iniciar com vida > 100.
