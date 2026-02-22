@@ -47,14 +47,14 @@ public class PersonagemRepository {
     public void salvarOuAtualizar(Personagem personagem) {
         String sql = "INSERT INTO personagem (nome, classe, ataque, defesa, vida, vida_maxima, xp, nivel) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) "
-                + "ON CONFLICT(nome) DO UPDATE SET "
-                + "classe = excluded.classe, "
-                + "ataque = excluded.ataque, "
-                + "defesa = excluded.defesa, "
-                + "vida = excluded.vida, "
-                + "vida_maxima = excluded.vida_maxima, "
-                + "xp = excluded.xp, "
-                + "nivel = excluded.nivel";
+                + "ON DUPLICATE KEY UPDATE "
+                + "classe = VALUES(classe), "
+                + "ataque = VALUES(ataque), "
+                + "defesa = VALUES(defesa), "
+                + "vida = VALUES(vida), "
+                + "vida_maxima = VALUES(vida_maxima), "
+                + "xp = VALUES(xp), "
+                + "nivel = VALUES(nivel)";
 
         try (Connection connection = databaseManager.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
