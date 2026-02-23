@@ -7,8 +7,11 @@ import com.model.Personagem;
 import com.model.TipoClasse;
 import com.model.TipoInimigos;
 import com.service.CombateController;
+import com.service.CombateController.ResultadoCombate;
 import com.service.CombateService;
+import com.service.LojaService;
 import com.service.NivelService;
+import com.service.SantuarioService;
 import com.repository.PersonagemRepository;
 
 public class App {
@@ -69,16 +72,55 @@ public class App {
 
         personagem.informacoes();
 
-        Random random = new Random();
-        TipoInimigos[] tiposInimigos = TipoInimigos.values();
-        TipoInimigos tipoAleatorio = tiposInimigos[random.nextInt(tiposInimigos.length)];
-        Inimigo inimigo = new Inimigo(tipoAleatorio);
-
         NivelService nivelService = new NivelService(personagemRepository);
         CombateService combateService = new CombateService(nivelService);
-        CombateController combate = new CombateController(combateService);
-        combate.iniciarCombate(personagem, inimigo);
-        personagemRepository.salvarOuAtualizar(personagem);
+        CombateController combate = new CombateController(combateService, scanner);
+        LojaService lojaService = new LojaService(scanner);
+        SantuarioService santuarioService = new SantuarioService(scanner, lojaService);
+
+        Random random = new Random();
+        TipoInimigos[] tiposInimigos = TipoInimigos.values();
+        int progressoFase = Math.max(1, personagem.getNivel());
+        boolean partidaAtiva = true;
+
+        while (partidaAtiva && personagem.getVida() > 0) {
+            int estagio = ((progressoFase - 1) / 10) + 1;
+            int indiceFase = ((progressoFase - 1) % 10) + 1;
+            boolean faseBoss = indiceFase == 10;
+
+            boolean continuarDoSantuario = santuarioService.abrirSantuario(personagem, estagio, indiceFase);
+            personagemRepository.salvarOuAtualizar(personagem);
+            if (!continuarDoSantuario) {
+                partidaAtiva = false;
+                break;
+            }
+
+            TipoInimigos tipoAleatorio = null;
+            while (tipoAleatorio == null) {
+                TipoInimigos candidato = tiposInimigos[random.nextInt(tiposInimigos.length)];
+                if (candidato.isBoss() == faseBoss) {
+                    tipoAleatorio = candidato;
+                }
+            }
+
+            Inimigo inimigo = new Inimigo(tipoAleatorio, estagio, indiceFase);
+            System.out.println("Estagio " + estagio + " | Fase " + indiceFase);
+
+            ResultadoCombate resultado = combate.iniciarCombate(personagem, inimigo);
+            personagemRepository.salvarOuAtualizar(personagem);
+
+            if (resultado == ResultadoCombate.DERROTA) {
+                partidaAtiva = false;
+                break;
+            }
+
+            if (resultado == ResultadoCombate.FUGA) {
+                System.out.println("Voce retornou para Firelink Shrine.");
+                continue;
+            }
+
+            progressoFase++;
+        }
 
         scanner.close();
     }

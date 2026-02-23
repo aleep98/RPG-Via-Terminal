@@ -17,7 +17,9 @@ public class CombateService {
     }
 
     public int realizarAtaque(Personagem atacante, Inimigo alvo) {
-        int dano = atacante.getAtaque() + (int) (Math.random() * 15);
+        int danoToque = atacante.atacarPorToque();
+        int danoTick = atacante.atacarPorTick();
+        int dano = danoToque + danoTick;
         alvo.receberDano(dano);
         return dano;
     }
@@ -49,7 +51,7 @@ public class CombateService {
             return 0;
         }
 
-        int danoInimigo = inimigo.getAtaque() + (int) (Math.random() * 10);
+        int danoInimigo = inimigo.getAtaque() + (int) (Math.random() * 6);
         int danoFinal = Math.max(0, danoInimigo - defesaJogador);
 
         jogador.receberDano(danoFinal);
@@ -62,7 +64,8 @@ public class CombateService {
 
     public boolean jogadorVenceu(Inimigo inimigo, Personagem jogador) {
         if (inimigo.getVida() <= 0) {
-            nivelService.ganharXP(jogador, 50);
+            nivelService.ganharXP(jogador, inimigo.getRecompensaXp());
+            jogador.receberOuro(inimigo.getRecompensaOuro());
             return true;
         }
         return false;

@@ -31,6 +31,8 @@ public class NivelService {
         personagem.setVidaMaxima(personagem.getVidaMaxima() + 20);
         personagem.setVida(personagem.getVida() + 20);
         personagem.setAtaque(personagem.getAtaque() + 5);
+        personagem.setDanoPorSegundo(personagem.getDanoPorSegundo() + 0.8);
+        personagem.setChanceCritica(personagem.getChanceCritica() + 0.01);
 
         System.out.println("Parabens! Voce subiu para o nivel " + personagem.getNivel() + "!");
     }

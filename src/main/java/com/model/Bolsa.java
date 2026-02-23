@@ -14,16 +14,19 @@ public class Bolsa {
         this.item = new ArrayList<>();
 
         item.add(new Items("Pocao de Vida", TipoItem.CURA, 20));
-        item.add(new Items("Pergaminho Flamejante", TipoItem.ATAQUE_TEMPORARIO, 10));
-        item.add(new Items("Pocao Furia", TipoItem.ATAQUE_TEMPORARIO, 15));
+        item.add(new Items("Luva de Aco", TipoItem.DANO_POR_TOQUE, 5, 1, 30, 1.25, 0.20));
+        item.add(new Items("Pergaminho Flamejante", TipoItem.DANO_POR_SEGUNDO, 3, 1, 36, 1.27, 0.18));
+        item.add(new Items("Anel da Fortuna", TipoItem.OURO_BONUS, 0.05, 1, 40, 1.30, 0.14));
     }
 
-    public void adicionarItem(Items item) {
+    public boolean adicionarItem(Items item) {
         if (this.item.size() < capacidade) {
             this.item.add(item);
             System.out.println(item.getNome() + " foi adicionado a bolsa.");
+            return true;
         } else {
             System.out.println("A bolsa esta cheia!");
+            return false;
         }
     }
 

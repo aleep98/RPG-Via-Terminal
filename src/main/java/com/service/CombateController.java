@@ -6,23 +6,36 @@ import com.model.Inimigo;
 import com.model.Personagem;
 
 public class CombateController {
+    public enum ResultadoCombate {
+        VITORIA,
+        DERROTA,
+        FUGA
+    }
 
     private Scanner scanner;
     private CombateService combateService;
+    private CombateHudRenderer hudRenderer;
 
     public CombateController() {
         this.scanner = new Scanner(System.in);
         this.combateService = new CombateService();
+        this.hudRenderer = new CombateHudRenderer();
     }
 
     public CombateController(CombateService combateService) {
         this.scanner = new Scanner(System.in);
         this.combateService = combateService;
+        this.hudRenderer = new CombateHudRenderer();
     }
 
-    public void iniciarCombate(Personagem jogador, Inimigo inimigo) {
-        System.out.println("O inimigo " + inimigo.getTipoInimigos() + " apareceu!");
-        System.out.println("Combate iniciado!");
+    public CombateController(CombateService combateService, Scanner scanner) {
+        this.scanner = scanner;
+        this.combateService = combateService;
+        this.hudRenderer = new CombateHudRenderer();
+    }
+
+    public ResultadoCombate iniciarCombate(Personagem jogador, Inimigo inimigo) {
+        String ultimoEvento = "O inimigo " + inimigo.getTipoInimigos() + " apareceu. Combate iniciado!";
 
         while (combateService.isCombateAtivo(jogador, inimigo)) {
 
@@ -30,19 +43,20 @@ public class CombateController {
             int defesaAtiva = 0;
 
             while (!turnoEncerrado) {
+                hudRenderer.render(jogador, inimigo, ultimoEvento);
                 exibirMenu();
                 int opcao = lerOpcao();
 
                 switch (opcao) {
                     case 1:
                         int dano = combateService.realizarAtaque(jogador, inimigo);
-                        System.out.println("Voce causou " + dano + " de dano.");
+                        ultimoEvento = "Voce causou " + dano + " de dano.";
                         turnoEncerrado = true;
                         break;
 
                     case 2:
                         defesaAtiva = combateService.calcularDefesa(jogador);
-                        System.out.println("Voce assumiu postura defensiva! Reducao de dano: " + defesaAtiva);
+                        ultimoEvento = "Postura defensiva ativada. Reducao de dano: " + defesaAtiva + ".";
                         turnoEncerrado = true;
                         break;
 
@@ -54,43 +68,40 @@ public class CombateController {
                         if (escolhaItem >= 0) {
                             String resultado = combateService.usarItem(jogador, escolhaItem);
                             if (resultado != null) {
-                                System.out.println("Voce usou: " + resultado);
+                                ultimoEvento = "Voce usou: " + resultado;
                             } else {
-                                System.out.println("Item invalido!");
+                                ultimoEvento = "Item invalido.";
                             }
+                        } else {
+                            ultimoEvento = "Selecao de item cancelada.";
                         }
                         break;
 
                     case 4:
-                        System.out.println("Tentando fugir...");
-                        if (combateService.tentarFugir()) {
-                            System.out.println("Fuga bem sucedida!");
-                            return;
-                        } else {
-                            System.out.println("A fuga falhou! Voce perdeu o turno.");
-                            turnoEncerrado = true;
-                        }
-                        break;
+                        hudRenderer.render(jogador, inimigo, "Voce usou o osso de retorno e voltou para Firelink Shrine.");
+                        return ResultadoCombate.FUGA;
 
                     default:
-                        System.out.println("Opcao invalida!");
+                        ultimoEvento = "Opcao invalida.";
                 }
             }
 
             if (inimigo.getVida() > 0) {
                 esperar(1000);
                 int danoRecebido = combateService.turnoInimigo(inimigo, jogador, defesaAtiva);
-                System.out.println("O inimigo atacou e causou " + danoRecebido + " de dano!");
-                System.out.println("Sua vida: " + jogador.getVida() + " | Vida Inimigo: " + inimigo.getVida());
+                ultimoEvento = "O inimigo atacou e causou " + danoRecebido + " de dano.";
             }
 
             esperar(1000);
         }
 
         if (combateService.jogadorVenceu(inimigo, jogador)) {
-            System.out.println("Voce venceu o combate! E ganhou 50 XP!");
+            ultimoEvento = "Vitoria! +" + inimigo.getRecompensaXp() + " XP e +" + inimigo.getRecompensaOuro() + " ouro base.";
+            hudRenderer.render(jogador, inimigo, ultimoEvento);
+            return ResultadoCombate.VITORIA;
         } else {
-            System.out.println("Voce morreu...");
+            hudRenderer.render(jogador, inimigo, "Voce morreu...");
+            return ResultadoCombate.DERROTA;
         }
     }
 
@@ -99,7 +110,7 @@ public class CombateController {
         System.out.println("1 - Atacar");
         System.out.println("2 - Defender");
         System.out.println("3 - Abrir Bolsa");
-        System.out.println("4 - Fugir");
+        System.out.println("4 - Retornar ao Santuario");
         System.out.print("Escolha: ");
     }
 
